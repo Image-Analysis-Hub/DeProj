@@ -65,7 +65,7 @@ We use builtin functions introduced in MATLAB R2019b. So you need at least this 
 The simplest way to get DeProj is to use `git` to clone this repository directly.
 
 ```sh
-git clone git@github.com:sebherbert/Deproj.git
+git clone git@gitlab.pasteur.fr:iah-public/DeProj.git
 ```
 
 If you do not have `git` on your system, or don't want to use it, download [the zip of the repository](https://gitlab.pasteur.fr/iah-public/DeProj/-/archive/rework-pub/DeProj-rework-pub.zip).
