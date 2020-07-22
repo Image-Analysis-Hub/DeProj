@@ -68,7 +68,7 @@ The simplest way to get DeProj is to use `git` to clone this repository directly
 git clone git@github.com:sebherbert/Deproj.git
 ```
 
-If you do not have `git` on your system, or don't want to use it, download [the zip of the repository](https://github.com/sebherbert/Deproj/archive/rework-pub.zip).
+If you do not have `git` on your system, or don't want to use it, download [the zip of the repository](https://gitlab.pasteur.fr/iah-public/DeProj/-/archive/rework-pub/DeProj-rework-pub.zip).
 
 Then you want to add DeProj to your MATLAB path. To do so, simply add the `src` folder to the MATLAB path, but do not add its subfolders. It contains only two MATLAB classes: `@epicell` (that stores the data for a single deprojected cell) and `@deproj` that is used to create and manage a collection of `@epicell`s. 
 
