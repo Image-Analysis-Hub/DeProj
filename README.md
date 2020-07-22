@@ -1,4 +1,4 @@
-![DeProjLogo-256](/Users/tinevez/Development/Matlab/DeProj/static/DeProjLogo-512.png)
+![DeProjLogo-256](static/DeProjLogo-512.png)
 
 DeProj is a MATLAB app made to yield accurate morphological measurements on cells in epithelia or tissues.
 
