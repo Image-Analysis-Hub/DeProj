@@ -96,7 +96,7 @@ classdef deproj
      %% Public static methods: builders & util.
     methods ( Access = public, Hidden = false, Static = true )
         
-        % Returns the Z position of points taken from a height-map.
+        % Returns a deproj object built from segmentation and height-map.
         obj = from_heightmap( I, ...
             H, ...
             pixel_size, ...
@@ -106,11 +106,25 @@ classdef deproj
             inpaint_zeros, ...
             prune_zeros );
         
+        % Returns a deproj object built from the results of the tool
+        % from Yohannes Bellaiche lab.
+        obj = from_bellaiche( ...
+            cells, ...
+            frame, ...
+            sides, ...
+            vertices, ...
+            voxel_depth, ...
+            units )
+        
         % Returns the seismic colormap.
         cmap = cmap_seismic();
         
         % Compute local curvature from the smoothed height-map.
         [ curvMean, curvGauss, curvK1, curvK2 ] = compute_curvatures( H, object_scale, pixel_size, voxel_depth, invert_z )
+        
+        % Sort the points of a polygon in clockwise manner.
+        P2 = sort_polygon( P )
+        
 
     end
     
