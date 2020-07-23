@@ -19,7 +19,9 @@ function obj = from_bellaiche( ...
     fprintf('Building the junction graph.\n' )
     
     edge_table = table();
-    edge_table.EndNodes = sides.vertices;
+    
+    % Prune duplicate edges.
+    edge_table.EndNodes = unique( sides.vertices, 'rows' );
     
     node_table = table();
     jxy = vertices.XYs;
