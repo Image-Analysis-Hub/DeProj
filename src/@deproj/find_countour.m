@@ -20,23 +20,15 @@ function P2 = find_countour( P )
         done = current == size( P, 1 );
 
         prev_id = id;
-        id = find_next_point( id );
+        [ ~, id ] = min( D( :, id ) );
+
         ps = P( id, : );
-        set_visited( prev_id )
         P2( current, : ) = ps;
         current = current + 1;
+
+        D( prev_id, : ) = Inf;
+        D( :, prev_id ) = Inf;
         
-    end
-    
-    
-    function set_visited( id )
-        D( id, : ) = Inf;
-        D( :, id ) = Inf;
-    end
-    
-    function id = find_next_point( id )                
-        [ ~, id ] = min( D( :, id ) );
-    end
-    
+    end    
 end
 
