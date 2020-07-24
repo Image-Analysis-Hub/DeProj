@@ -127,6 +127,10 @@ classdef deproj
         
         % Sort x,y coordinates along a continuous contour.
         P2 = find_countour( P )
+
+        % Read a PLY file.
+        [ V, F, comments ] = ply_read( file_path )
+
         
 
     end
