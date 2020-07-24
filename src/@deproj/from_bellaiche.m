@@ -65,7 +65,7 @@ function obj = from_bellaiche( ...
         junction_ids = cells.vertices{ i };
         
         id = cells.numbers( i );
-        epicells( i ) = epicell( boundary, junction_ids, id );
+        epicells( i-1 ) = epicell( boundary, junction_ids, id );
         
         
     end
