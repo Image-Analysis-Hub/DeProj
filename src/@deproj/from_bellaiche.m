@@ -54,7 +54,7 @@ function obj = from_bellaiche( ...
         x = idivide( ids, width);
         y = rem( ids, width);
         P = double( [ x y ] );
-        P = deproj.sort_polygon( P );
+        P = deproj.find_countour( P );
         P = P * pixel_size;
         
         % TODO

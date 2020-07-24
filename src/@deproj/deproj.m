@@ -125,6 +125,9 @@ classdef deproj
         % Sort the points of a polygon in clockwise manner.
         P2 = sort_polygon( P )
         
+        % Sort x,y coordinates along a continuous contour.
+        P2 = find_countour( P )
+        
 
     end
     
