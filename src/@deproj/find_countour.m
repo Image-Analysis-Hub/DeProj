@@ -4,9 +4,12 @@ function P2 = find_countour( P )
     P2 = NaN( size( P ) );
     current = 1;
 
+    D = squareform( pdist ( P ) );
+    D( D == 0 ) = Inf;
+    
     % Start point
-    ps = P( 1, : );    
-    set_visited( 1 )
+    id = 1;
+    ps = P( id, : );    
     P2( current, : ) = ps;
     current = current + 1;
     
@@ -16,9 +19,10 @@ function P2 = find_countour( P )
 
         done = current == size( P, 1 );
 
-        id = find_next_point( ps );
+        prev_id = id;
+        id = find_next_point( id );
         ps = P( id, : );
-        set_visited( id )
+        set_visited( prev_id )
         P2( current, : ) = ps;
         current = current + 1;
         
@@ -26,11 +30,12 @@ function P2 = find_countour( P )
     
     
     function set_visited( id )
-        P( id, : ) = NaN;
+        D( id, : ) = Inf;
+        D( :, id ) = Inf;
     end
     
-    function id = find_next_point( p0 )        
-        [ ~, id ] = pdist2( P, p0, 'Euclidean', 'Smallest', 1 );
+    function id = find_next_point( id )                
+        [ ~, id ] = min( D( :, id ) );
     end
     
 end
