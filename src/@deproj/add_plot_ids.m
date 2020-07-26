@@ -1,5 +1,5 @@
-function hts = add_plot_id( obj, ax )
-%ADD_PLOT_ID Add the epicell ids to the specified plot axes.
+function hts = add_plot_ids( obj, ax )
+%ADD_PLOT_IDS Add the epicell ids to the specified plot axes.
 
     epicells = obj.epicells;
     n_objects = numel( epicells );

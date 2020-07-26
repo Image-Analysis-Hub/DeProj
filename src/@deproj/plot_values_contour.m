@@ -1,5 +1,13 @@
-function hts = add_plot_variable( obj, values, ax )
-%ADD_PLOT_VARIABLE Plots the boundaries as patches, colored by the specified values.
+function hts = plot_values_contour( obj, values, ax )
+%PLOT_VALUES_CONTOUR Plot the tissue with the cell exact contours, colored by the specified values.
+%
+% INPUTS:
+%   obj: a deproj object, with N epicells.
+%   values - a N x 1 array with values to use for coloring.
+%   ax - the axes to plot in.
+% 
+% OUTPUT:
+%   a N x 1 array of handles to the cell polygon objects.
     
     epicells = obj.epicells;
     boundaries = { epicells.boundary };

@@ -71,8 +71,17 @@ dpr = deproj.from_heightmap( ...
 %% Plot morphological parameters.
 
 close all
-plot_sizes( dpr );
-plot_fit_plane( dpr );
-plot_fit_ellipse( dpr );
-plot_curvatures( dpr );
-plot_distorsions( dpr );
+
+fprintf( 'Plotting the cell sizes.\n' )
+dpr.figure_cell_sizes;
+
+fprintf( 'Plotting the tissue orientation.\n' )
+dpr.figure_tissue_orientation;
+
+fprintf( 'Plotting the cell elongation and direction.\n' )
+dpr.figure_cell_elongation;
+
+fprintf( 'Plotting the impact of projection distorsion.\n' )
+dpr.figure_distorsions;
+
+fprintf( 'Finished.\n' )

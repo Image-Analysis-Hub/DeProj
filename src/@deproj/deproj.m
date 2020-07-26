@@ -33,69 +33,35 @@ classdef deproj
         
         %% Generate figures.
         
-        % Figure with the local plan orientation for a collection of epicells.
-        [ hf, ax1, ax2, ax3 ] = plot_fit_plane( obj, scale_bar_length )
+        % Figure with the local tissue orientation for a collection of epicells.
+        [ hf, ax1, ax2, ax3 ] = figure_tissue_orientation( obj, scale_bar_length )
         
-        % Plot the 2D ellipses on the tissue surface.
-        [ hf, hc, he ] = plot_fit_ellipse( obj, scale_bar_length )
+        % Plot the cell elongation and 2D orientation with cells as 2D ellipses.
+        [ hf, ax1, ax2 ] = figure_cell_elongation( obj, scale_bar_length )
         
         % Figure with the local curvaure for a collection of epicells.
-        [ hf, ax1, ax2, ax3 ] = plot_curvatures( obj, scale_bar_length )
+        [ hf, ax1, ax2, ax3 ] = figure_curvatures( obj, scale_bar_length )
         
         % Figure with the cells area and perimeter.
-        [ hf, ax1, ax2 ] = plot_sizes( obj, scale_bar_length )
+        [ hf, ax1, ax2 ] = figure_cell_sizes( obj, scale_bar_length )
         
         % Figure with the error on uncorrected cells area and perimeter.
-        [ hf, ax1, ax2 ] = plot_distorsions( obj, scale_bar_length )
+        [ hf, ax1, ax2 ] = figure_distorsions( obj, scale_bar_length )
         
         %% Helpers.
         % They are public in case of.
         
-        % Add the tissue plot colored with the 1st euler angle.
-        hts = add_plot_euler_alpha( obj, ax )
-        
-        % Add the tissue plot colored with the 2nd euler angle.
-        hts = add_plot_euler_beta( obj, ax )
-        
-        % Add the tissue plot colored with the 3rd euler angle.
-        hts = add_plot_euler_gamma( obj, ax )
-        
         % Add the epicell ids to the specified plot axes.
-        hts = add_plot_id( obj,  ax )
+        hts = add_plot_ids( obj, ax )
         
         % Add a scale-bar to the plot.
         [ hsb, ht ] = add_plot_scalebar( obj, length, ax )
         
-        % Plots the boundaries as patches, colored by the specified values.
-        hts = add_plot_variable( obj, values, ax )
+        % Plot the tissue with the cell exact contours, colored by the specified values.
+        hts = plot_values_contour( obj, values, ax )
         
-        %Plots the ellipses, colored by the specified values.
-        hts = add_ellipse_variable( obj, values, cmap, ax )
-        
-        % Add the tissue plot colored with the mean curvature.
-        hts = add_plot_curvature_mean( obj, ax )
-        
-        % Add the tissue plot colored with the Gaussian curvature.
-        hts = add_plot_curvature_gauss( obj, ax )
-        
-        % Add the tissue plot colored with the first principal curvature.
-        hts = add_plot_curvature_k1( obj, ax )
-        
-        % Add the tissue plot colored with the second principal curvature.
-        hts = add_plot_curvature_k2( obj, ax )
-        
-        % Add the tissue plot colored with the cell area.
-        hts = add_plot_area( obj, ax )
-        
-        % Add the tissue plot colored with the cell perimeter.
-        hts = add_plot_perimeter( obj, ax )
-        
-        % Add the tissue plot colored with the error on cell area caused by the projection.
-        hts = add_plot_distorsion_area( obj, ax )
-        
-        % Add the tissue plot colored with the error on cell perimeter caused by the projection.
-        hts = add_plot_distorsion_perimeter( obj, ax )
-
+        % Plot the tissue with cells as ellipses, colored by the specified values.
+        hts = plot_values_ellipse( obj, values, cmap, ax, min_val_col, max_val_col )
                 
     end
     

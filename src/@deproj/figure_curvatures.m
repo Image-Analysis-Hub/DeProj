@@ -1,26 +1,35 @@
-function [ hf, ax1, ax2, ax3 ] = plot_curvatures( obj, scale_bar_length )
-%PLOT_CURVATURES Figure with the local curvature for a collection of epicells.
+function [ hf, ax1, ax2, ax3 ] = figure_curvatures( obj, scale_bar_length )
+%FIGURE_CURVATURES Figure with the local curvature for a collection of epicells.
 
     if nargin < 2
         scale_bar_length = 10;
     end
-
+    
+    epicells = obj.epicells;
+    curvs = vertcat( epicells.curvatures );
+    
     hf = figure( 'Position', [ 1204 20 600 1000 ] );
     
     ax1 = subplot( 3, 1, 1 );
     hold on
     axis equal
-    add_plot_curvature_mean( obj, ax1 );
-
+    
+    mean_curv = curvs( :, 1 );
+    obj.plot_values_contour( mean_curv, ax1 );
+    
     ax2 = subplot( 3, 1, 2 );
     hold on
     axis equal
-    add_plot_curvature_k1( obj, ax2 );
-
+    
+    k1_curv = curvs( :, 3 );    
+    obj.plot_values_contour( k1_curv, ax2 );
+    
     ax3 = subplot( 3, 1, 3 );
     hold on
     axis equal
-    add_plot_curvature_k2( obj, ax3 );
+    
+    k2_curv = curvs( :, 4 );    
+    obj.plot_values_contour( k2_curv, ax3 );
     
     % Collect min & max.
     cl1 = get( ax1, 'CLim' );
@@ -46,7 +55,7 @@ function [ hf, ax1, ax2, ax3 ] = plot_curvatures( obj, scale_bar_length )
     c = colorbar(ax3, 'Location', 'EastOutside' );
     c.Label.String = sprintf('Curvature (1/%s)', obj.units );
     
-    add_plot_scalebar( obj, scale_bar_length, ax3 );
+    obj.add_plot_scalebar( scale_bar_length, ax3 );
     
     axis( ax1, 'off' )
     axis( ax2, 'off' )
