@@ -5,22 +5,24 @@ function hts = plot_values_contour( obj, values, ax )
 %   obj: a deproj object, with N epicells.
 %   values - a N x 1 array with values to use for coloring.
 %   ax - the axes to plot in.
-% 
+%
 % OUTPUT:
-%   a N x 1 array of handles to the cell polygon objects.
-    
+%   the handle to the cells patch object.
+
     epicells = obj.epicells;
     boundaries = { epicells.boundary };
-    n_objects = numel( boundaries );    
-    hts = NaN( n_objects, 1 );
-    
-    if n_objects > 1000, lw = 1; else, lw = 2; end
-    
-    for i = 1 :  n_objects
 
-        p = boundaries{ i };
-        val = values( i );
-        hts(i ) = patch( ax, p(:,1), p(:,2), p(:,3), val, ...
-            'LineWidth', lw );
-    end
+    n_objects = numel( boundaries );
+    if n_objects > 1000, lw = 1; else, lw = 2; end
+
+    [ X, Y, Z ] = obj.to_matrices();
+    hts = patch( ...
+        'XData', X, ...
+        'YData', Y, ...
+        'ZData', Z, ...
+        'FaceVertexCData', values, ...
+        'FaceColor', 'flat', ...
+        'LineWidth', lw, ...
+        'Parent', ax );
+
 end

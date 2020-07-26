@@ -31,6 +31,9 @@ classdef deproj
         % Returns the faces and vertices of a deproj collection.
         [ V, F ] = to_vertices_and_faces( obj )
         
+        % Returns the cells boundary polygons as 3 matrices padded by NaNs.
+        [ X, Y, Z ] = to_matrices( obj )
+
         %% Generate figures.
         
         % Figure with the local tissue orientation for a collection of epicells.
