@@ -131,7 +131,8 @@ classdef deproj
         % Read a PLY file.
         [ V, F, comments ] = ply_read( file_path )
 
-        
+        % Create a height-map from a mesh.
+        [ H, min_y, min_x ] = mesh_to_heightmap( V, pixel_size )
 
     end
     
@@ -143,6 +144,7 @@ classdef deproj
         
         % Returns the cells from a BW image with ridges.
         [ objects, junction_graph ] = mask_to_objects( I, downsample )
+        
         
     end
 end
