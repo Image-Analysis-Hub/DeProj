@@ -13,7 +13,7 @@ function [ curvMean, curvGauss, curvK1, curvK2 ] = compute_curvatures( H, object
         pixel_size = 1;
     end
 
-    if nargin >= 2 && ~isnan( object_scale) && ~isempty( object_scale )
+    if nargin >= 2 && ~isempty( object_scale ) && ~isnan( object_scale)
         % We need to smooth the height-map over the scale of several cells.
         Hs = imgaussfilt( H, 3 * object_scale );
     else
