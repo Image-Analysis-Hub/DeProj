@@ -26,6 +26,11 @@ classdef deproj
         % Exports results to a spreadsheet file.
         to_file( obj, file_name, include_header )
         
+        %% Conversion between MATLAB objects.
+        
+        % Returns the faces and vertices of a deproj collection.
+        [ V, F ] = to_vertices_and_faces( obj )
+        
         %% Generate figures.
         
         % Figure with the local plan orientation for a collection of epicells.
