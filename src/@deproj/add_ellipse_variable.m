@@ -9,6 +9,8 @@ function hts = add_ellipse_variable( obj, values, cmap, ax )
     maxv = max( values );
 
     colors = colormap( cmap );
+    
+    if n_objects > 1000, lw = 1; else, lw = 2; end
 
     idx = @(v) 1 + round( (v - minv)/(maxv - minv)  * ( size( colors, 1 ) - 1 ) );
     for i = 1 :  n_objects
@@ -23,7 +25,7 @@ function hts = add_ellipse_variable( obj, values, cmap, ax )
         j = idx( val );
         set( [ h1 h2 ], ...
             'Color', colors( j, : ), ...
-            'LineWidth', 2 )
+            'LineWidth', lw )
     end
     set( ax, 'CLim', [ minv maxv ] )
 end
