@@ -19,6 +19,8 @@ function obj = from_bellaiche( ...
     tic
     
     [ V, F ] = deproj.ply_read( mesh_file_path );
+    % Offset Z to 0.
+    V( :, 3 ) = V( :, 3 ) - min( V (:, 3 ) );    
     si = scatteredInterpolant( V(:,1), V(:,2), V(:,3), 'linear', 'nearest' );
     
     fprintf('Loaded %d vertices in %.1f seconds.\n', size(V, 1), toc )
