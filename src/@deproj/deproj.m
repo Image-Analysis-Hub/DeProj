@@ -64,7 +64,7 @@ classdef deproj
         hts = plot_values_contour( obj, values, ax )
         
         % Plot the tissue with cells as ellipses, colored by the specified values.
-        hts = plot_values_ellipse( obj, values, cmap, ax, min_val_col, max_val_col )
+        hts = plot_values_ellipse( obj, values, ax )
                 
     end
     

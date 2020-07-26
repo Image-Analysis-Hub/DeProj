@@ -10,13 +10,13 @@ function [ hf, ax1, ax2 ] = figure_cell_elongation( obj, scale_bar_length )
     %% Direction.
     
     ax1 = subplot( 2, 1, 1 );
-    cmap1 = 'hsv';
-    colormap( cmap1 )
+    colormap( 'hsv' )
     hold on
     axis equal
     
     values1 = rad2deg( [ obj.epicells.proj_direction ]' );
-    obj.plot_values_ellipse( values1, cmap1, ax1, -90, 90 );
+    obj.plot_values_ellipse( values1, ax1 );
+    set( ax1, 'CLim', [ -90 90 ] )
 
     axis( ax1, 'off' )
     colorbar( ax1 )
@@ -31,8 +31,9 @@ function [ hf, ax1, ax2 ] = figure_cell_elongation( obj, scale_bar_length )
     axis equal
     
     values2 = [ obj.epicells.eccentricity ]';
-    cmap2 = 'parula';
-    obj.plot_values_ellipse( values2, cmap2, ax2, 0, 1 );
+    obj.plot_values_ellipse( values2, ax2 );
+    set( ax2, 'CLim', [ 0 1 ] )
+    colormap(ax2, 'parula' );
 
     axis( ax2, 'off' )
     colorbar( ax2 )
@@ -42,8 +43,7 @@ function [ hf, ax1, ax2 ] = figure_cell_elongation( obj, scale_bar_length )
     
     
     add_plot_scalebar(  obj, scale_bar_length, ax2 );
-
-
+    linkaxes( [ ax1 ax2 ] )
 
 end
 
