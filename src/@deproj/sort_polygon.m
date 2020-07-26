@@ -1,4 +1,4 @@
-function P2 = sort_polygon( P )
+function [ P2, sort_indexes ] = sort_polygon( P )
 %SORT_POLYGON Sort the points of a polygon in clockwise manner.
     
     center = mean( P );

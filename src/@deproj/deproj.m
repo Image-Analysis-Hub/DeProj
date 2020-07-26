@@ -90,6 +90,7 @@ classdef deproj
         
         % Add the tissue plot colored with the error on cell perimeter caused by the projection.
         hts = add_plot_distorsion_perimeter( obj, ax )
+
                 
     end
     
@@ -123,7 +124,7 @@ classdef deproj
         [ curvMean, curvGauss, curvK1, curvK2 ] = compute_curvatures( H, object_scale, pixel_size, voxel_depth, invert_z )
         
         % Sort the points of a polygon in clockwise manner.
-        P2 = sort_polygon( P )
+        [ P2, I ] = sort_polygon( P )
         
         % Sort x,y coordinates along a continuous contour.
         P2 = find_countour( P )
