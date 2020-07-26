@@ -18,11 +18,26 @@ function obj = from_bellaiche( ...
     fprintf('Loading and processing the tissue mesh file.\n' )
     tic
     
-    V = deproj.ply_read( mesh_file_path );
+    [ V, F ] = deproj.ply_read( mesh_file_path );
     si = scatteredInterpolant( V(:,1), V(:,2), V(:,3), 'linear', 'nearest' );
     
     fprintf('Loaded %d vertices in %.1f seconds.\n', size(V, 1), toc )
     
+    %% Compute local curvature from the height-map.
+    
+    tic
+    fprintf('Computing tissue local curvature.\n' )
+    [ H, min_y, min_x ] = deproj.mesh_to_heightmap( V, pixel_size );
+    % We need to compute a smoothing scale for H, lest the curvature values
+    % will have strong discontinuities along the edges of the mesh.    
+    med_area = median( face_areas( V, F ) ); % um^2    
+    faces_scale = 2 * sqrt( med_area )/ pi * pixel_size; % pixel units
+    [ curvMean, curvGauss, curvK1, curvK2 ] = deproj.compute_curvatures( ...
+        H, ...
+        faces_scale, ...
+        pixel_size );
+    
+    fprintf('Done in %.1f seconds.\n', toc )
     
     %% Build the junction graph.
     
@@ -66,6 +81,7 @@ function obj = from_bellaiche( ...
         P = double( [ x y ] );
         P = deproj.find_countour( P );
         P = P * pixel_size;
+        center = mean( P );
         
         % Get Z from the mesh.
         z = si( P );
@@ -74,8 +90,13 @@ function obj = from_bellaiche( ...
         % Get the junction ids.
         junction_ids = cells.vertices{ i };
         
+        % Get center position with respect to crvature image.
+        xc = round( center( 1 ) / pixel_size ) - min_x;
+        yc = round( center( 2 ) / pixel_size ) - min_y;
+        curvatures = [ curvMean( yc, xc ), curvGauss( yc, xc ), curvK1( yc, xc), curvK2( yc, xc ) ];
+        
         id = cells.numbers( i );
-        epicells( i-1 ) = epicell( boundary, junction_ids, id );
+        epicells( i-1 ) = epicell( boundary, junction_ids, id, curvatures );
         
         
     end
@@ -85,5 +106,14 @@ function obj = from_bellaiche( ...
     obj = deproj( epicells, junction_graph, units );
     
     
+    
+    function  areas = face_areas( V, F )
+        
+        vec_a = V( F(:, 2), :) - V( F(:, 1), :);
+        vec_b = V( F(:, 3), :) - V( F(:, 1), :);
+        vec_c = cross( vec_a, vec_b, 2);
+        areas = 1/2 * sum( sqrt( sum( vec_c .* vec_c, 2 ) ) );
+        
+    end
 end
 
