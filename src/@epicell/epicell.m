@@ -6,6 +6,7 @@ classdef epicell
         boundary
         center
         junction_ids
+        n_neighbors
         area
         perimeter
         euler_angles
@@ -39,6 +40,7 @@ classdef epicell
             % Base properties.
             obj.boundary = boundary_reduced;
             obj.junction_ids = junction_ids;
+            obj.n_neighbors = numel( junction_ids );
             obj.id = id;
             obj.center = mean( boundary );
             

@@ -51,6 +51,9 @@ classdef deproj
         % Figure with the error on uncorrected cells area and perimeter.
         [ hf, ax1, ax2 ] = figure_distorsions( obj, scale_bar_length )
         
+        % Figure with the number of neighbors around each cell.
+        [ hf, ax ] = figure_topology( obj, scale_bar_length )
+
         %% Helpers.
         % They are public in case of.
         
