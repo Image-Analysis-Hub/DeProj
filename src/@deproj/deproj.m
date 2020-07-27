@@ -28,8 +28,8 @@ classdef deproj
         
         %% Conversion between MATLAB objects.
         
-        % Returns the faces and vertices of a deproj collection.
-        [ V, F ] = to_vertices_and_faces( obj )
+        % Returns the faces and vertices of the junction graph of a instance.
+        [ V, F ] = graph_to_VF( obj )
         
         % Returns the cells boundary polygons as 3 matrices padded by NaNs.
         [ X, Y, Z ] = to_matrices( obj )
@@ -65,6 +65,10 @@ classdef deproj
         
         % Plot the tissue with cells as ellipses, colored by the specified values.
         hts = plot_values_ellipse( obj, values, ax )
+        
+        % Plot the tissue with the cell contour approximated by the junctions, colored by the specified values.
+        hts = plot_values_junction( obj, values, ax )
+        
                 
     end
     
