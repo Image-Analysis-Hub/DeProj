@@ -1,5 +1,6 @@
-function [ V, F ] = to_vertices_and_faces( obj )
-%TO_FACES Returns the faces and vertices of a deproj collection.
+function [ V, F ] = graph_to_VF( obj )
+%GRAPH_TO_VF Returns the faces and vertices of the junction graph of a 
+% instance.
 % The vertices are made of the junction centroid coordinates.
 % Each face is one epicell, enclosed by the junctions around it.
 
