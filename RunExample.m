@@ -89,5 +89,6 @@ dpr.figure_distorsions;
 
 fprintf( 'Plotting the topology figure.\n' )
 dpr.figure_topology;
+dpr.plot_text( num2cell( vertcat( dpr.epicells.n_neighbors ) ), gca );
 
 fprintf( 'Finished.\n' )
