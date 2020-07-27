@@ -64,4 +64,7 @@ dpr.figure_cell_elongation;
 fprintf( 'Plotting the impact of projection distorsion.\n' )
 dpr.figure_distorsions;
 
+fprintf( 'Plotting the topology figure.\n' )
+dpr.figure_topology;
+
 fprintf( 'Finished.\n' )
