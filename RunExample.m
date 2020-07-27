@@ -78,6 +78,9 @@ dpr.figure_cell_sizes;
 fprintf( 'Plotting the tissue orientation.\n' )
 dpr.figure_tissue_orientation;
 
+fprintf( 'Plotting the tissue local curvature.\n' )
+dpr.figure_curvatures;
+
 fprintf( 'Plotting the cell elongation and direction.\n' )
 dpr.figure_cell_elongation;
 
