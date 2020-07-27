@@ -72,7 +72,9 @@ classdef deproj
         % Plot the tissue with the cell contour approximated by the junctions, colored by the specified values.
         hts = plot_values_junction( obj, values, ax )
         
-                
+        % Plot text at cell centers.
+        hts = plot_text( obj, texts, ax )
+      
     end
     
      %% Public static methods: builders & util.
