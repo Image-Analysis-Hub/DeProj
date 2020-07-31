@@ -74,6 +74,10 @@ classdef deproj
         
         % Plot text at cell centers.
         hts = plot_text( obj, texts, ax )
+        
+        % Display an image textured on the tissue surface.
+        him = texture_image( obj, T, Tmap, pixel_size, on_what )
+
       
     end
     
