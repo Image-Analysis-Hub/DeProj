@@ -117,14 +117,17 @@ classdef deproj
 
         % Create a height-map from a mesh.
         [ H, min_y, min_x ] = mesh_to_heightmap( V, pixel_size )
+        
+        % Prepare the height-map image according to user settings.
+        H = prepare_heightmap( H, voxel_depth, smooth_scale, invert_z, inpaint_zeros, prune_zeros )
+
+        % Returns the Z position of points taken from a processed height-map.
+        z_coords = get_z( P, H, pixel_size )
 
     end
     
     %% Private static methods: utilities.
     methods ( Access = private, Hidden = true, Static = true )
-        
-        % Returns the Z position of points taken from a height-map.
-        z_coords = get_z( P, H, pixel_size, voxel_depth )
         
         % Returns the cells from a BW image with ridges.
         [ objects, junction_graph ] = mask_to_objects( I, downsample )

@@ -50,10 +50,10 @@ function obj = from_heightmap( ...
     med_area = median(arrayfun( @(s) polyarea( s.boundary(:,1), s.boundary(:,2) ),  ...
         objects ) ); % pixels^2
     
-    object_scale = 2 * sqrt( med_area )/ pi; % pixel units
+    smooth_scale = 2 * sqrt( med_area )/ pi; % pixel units
     
     fprintf('Typical object scale: %.1f pixels or %.2f µm.\n', ...
-        object_scale, object_scale * pixel_size )
+        smooth_scale, smooth_scale * pixel_size )
     
     
     %% Scale to physical coordinates.
@@ -71,25 +71,16 @@ function obj = from_heightmap( ...
     
     fprintf('Collecting Z coordinates.\n' )
     tic
-    
-    if inpaint_zeros
-        mask = H == 0;
-        H = regionfill( H, mask );
-    end
-    
-    if prune_zeros
-        H( H == 0 ) = NaN;
-    end
-    
-    % Smooth the height-map over a scale smaller than a cell.
-    Hs1 = imgaussfilt( H, object_scale );
+
+    H = deproj.prepare_heightmap( H, voxel_depth, smooth_scale, invert_z, inpaint_zeros, prune_zeros );
     
     % For junction.
-    z_junction = deproj.get_z( junction_graph.Nodes.Centroid, Hs1, pixel_size, voxel_depth );
+    z_junction = deproj.get_z( junction_graph.Nodes.Centroid, H, pixel_size );
+    junction_graph.Nodes.Centroid = [ junction_graph.Nodes.Centroid z_junction ];
     
     % For objects.
     for i = 1 : n_objects
-        z_obj = deproj.get_z( objects( i ).boundary, Hs1, pixel_size, voxel_depth );
+        z_obj = deproj.get_z( objects( i ).boundary, H, pixel_size );
         objects( i ).boundary = [ objects( i ).boundary z_obj ];
         objects( i ).center(3) = mean( z_obj );
     end
@@ -120,31 +111,17 @@ function obj = from_heightmap( ...
         
         n_objects = numel( objects );
         
-    end
-    
-    %% Invert Z position for plotting.
-    
-    if invert_z
-        max_z = max( z_junction );
-        z_junction = max_z -  z_junction;
-        junction_graph.Nodes.Centroid = [ junction_graph.Nodes.Centroid z_junction ];
-        
-        for i = 1 : n_objects
-            objects( i ).boundary( :, 3 ) = max_z - objects( i ).boundary( :, 3 );
-            objects( i ).center( 3 ) = max_z - objects( i ).center( 3 );
-        end
-    end
+    end    
     
     %% Compute local curvature from the smoothed height-map.
     % Ref: http://users.vcnet.com/simonp/curvature.pdf
     
     fprintf('Computing tissue local curvature.\n' )
     [ curvMean, curvGauss, curvK1, curvK2 ] = deproj.compute_curvatures( ...
-        Hs1, ...
-        object_scale, ...
+        H, ...
+        smooth_scale, ...
         pixel_size, ...
-        voxel_depth, ...
-        invert_z );
+        voxel_depth );
     
     %% Create epicell instances.
     
