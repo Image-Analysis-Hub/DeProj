@@ -6,21 +6,32 @@ But the really important methods are those who create a `deproj` analysis result
 
 **Table of Contents**
 
+
    * [DeProj methods.](#deproj-methods)
       * [The deproj class methods.](#the-deproj-class-methods)
          * [Main deproj methods.](#main-deproj-methods)
             * [Static method from_heightmap](#static-method-from_heightmap)
+               * [The import.](#the-import)
+               * [The segmentation mask image I.](#the-segmentation-mask-image-i)
+               * [The height-map H.](#the-height-map-h)
+               * [Example.](#example)
+            * [Static method from_bellaiche](#static-method-from_bellaiche)
+               * [The segmentation from the software of Y.B. lab.](#the-segmentation-from-the-software-of-yb-lab)
+               * [The mesh mapping the tissue surface.](#the-mesh-mapping-the-tissue-surface)
+               * [The import.](#the-import-1)
             * [to_table](#to_table)
             * [to_file](#to_file)
-            * [plot_sizes](#plot_sizes)
-            * [plot_fit_plane](#plot_fit_plane)
-            * [plot_fit_ellipse](#plot_fit_ellipse)
-            * [plot_curvatures](#plot_curvatures)
-            * [plot_distorsions](#plot_distorsions)
-            * [add_plot_id](#add_plot_id)
+            * [figure_cell_sizes](#figure_cell_sizes)
+            * [figure_tissue_orientation](#figure_tissue_orientation)
+            * [figure_cell_elongation](#figure_cell_elongation)
+            * [figure_curvatures](#figure_curvatures)
+            * [figure_distorsions](#figure_distorsions)
+            * [add_plot_ids](#add_plot_ids)
          * [Secondary deproj methods.](#secondary-deproj-methods)
-            * [add_plot_variable](#add_plot_variable)
-            * [add_ellipse_variable](#add_ellipse_variable)
+            * [plot_values_contour](#plot_values_contour)
+            * [plot_values_ellipse](#plot_values_ellipse)
+            * [plot_values_junction](#plot_values_junction)
+            * [plot_text](#plot_text)
             * [Static method cmap_seismic](#static-method-cmap_seismic)
             * [Static method compute_curvatures](#static-method-compute_curvatures)
       * [The epicell class methods.](#the-epicell-class-methods)
@@ -37,6 +48,7 @@ But the really important methods are those who create a `deproj` analysis result
             * [Static method rot2eulerZXZ](#static-method-rot2eulerzxz)
             * [Static method fit_ellipse_2d](#static-method-fit_ellipse_2d)
             * [Static method fit_ellipse_3d](#static-method-fit_ellipse_3d)
+
 
 
 ## The `deproj` class methods.
