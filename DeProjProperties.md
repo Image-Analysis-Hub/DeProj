@@ -10,6 +10,7 @@ We give here the list of properties stored in the DeProj classes and their defin
          * [boundary](#boundary)
          * [center](#center)
          * [junction_ids](#junction_ids)
+         * [n_neighbors](#n_neighbors)
          * [area](#area)
          * [perimeter](#perimeter)
          * [euler_angles](#euler_angles)
@@ -131,6 +132,10 @@ j =
 ```
 
 <img src="static/BoundaryJunctionPlug.png" alt="BoundaryJunctionPlug" width="400" />
+
+### `n_neighbors`
+
+How many neighbours have a cell. Note that for cells on the border of the tissue, we try to deal with border effects. For a cell at the border, we count the number of neighbours including all cells, even the ones not drawn because they are cropped by the image borders.
 
 ### `area`
 
@@ -298,7 +303,7 @@ We can use this junction graph to plot a topological representation of the segme
 % Get the junction graph (run the RunExample.m file first)
 g = dpr.junction_graph;
 
-% Display the junction graph. We use the graph builtin plot method.
+% Display the junction graph. We use the graph builtin plot method. We just use a 2D plot.
 >> plot( g, ...
     'XData', g.Nodes.Centroid(:,1), ...
     'YData', g.Nodes.Centroid(:,2), ...
@@ -308,6 +313,10 @@ g = dpr.junction_graph;
     'Marker', 'o', ...
     'MarkerSize', 4, ...
     'NodeColor', 'r' )
+    
+% Another simpler solution is to directly use a special deproj plotting method.
+% This one plots the junction graph in 3D, with white edges. Uncomment it to try.
+% dpr.plot_values_junction( 'w', gca )
 ```
 
 ![PlotJunctionGraph_1](static/PlotJunctionGraph_1.png)
