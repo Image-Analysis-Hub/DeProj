@@ -32,6 +32,8 @@ function T = to_table( obj )
     
     proj_direction  = vertcat( epicells.proj_direction );
     
+    n_neighbors     = vertcat( epicells.n_neighbors );
+    
     curvatures      = vertcat( epicells.curvatures );
     curvature_mean  = curvatures( : , 1 );
     curvature_gauss = curvatures( : , 2 );
@@ -60,6 +62,7 @@ function T = to_table( obj )
         ellipse_sigma, ...
         eccentricity, ...
         proj_direction, ...
+        n_neighbors, ...
         curvature_mean, ...
         curvature_gauss, ...
         curvature_k1, ...
@@ -85,6 +88,7 @@ function T = to_table( obj )
             'Ellipse fit angle with X'' (see Euler angles) axis'
             'Eccentricity from ellipse fit'
             'Cell main direction projected on the XY plane'
+            'Number of neighbors around a cell'
             'Local mean curvature'
             'Local Gaussian curvature'
             'First principal curvature'
@@ -111,6 +115,7 @@ function T = to_table( obj )
             'radians'
             ''
             'radians'
+            ''
             sprintf( '1/%s', obj.units )
             sprintf( '1/%s²', obj.units )
             sprintf( '1/%s', obj.units )
