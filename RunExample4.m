@@ -1,4 +1,10 @@
 %% Display an image on the tissue surface.
+% We take the same data than for the first example and regenerate the
+% deproj object for it. 
+%
+% Then we plot the segmentation results (in 3D) and map the image of the 2D
+% projection image on the tissue surface. 
+
 
 %% Clear all.
 
@@ -8,47 +14,17 @@ clc
 
 %% Parameters, scripts and files location.
 
-% Add DeProj functions to the path.
+% Same things that for example 1. I will skip comments.
 addpath('./src')
-
-% Where are the images.
 root_folder = 'samples';
-
-% You can provide directly the segmentation results as a mask image, and
-% the code below will convert it into a list of objects.
-% For this to work, the mask image must be an 'ImageJ' mask, that is: the
-% cell contours must be black (pixel value == 0) and the cell interiors
-% must be white (pixel value > 0).
 mask_filename       = 'Segmentation-2.tif';
-
-% The height-map is an image that stores at every pixel the location of the
-% plane of interest in the source 3D image. Since the pixel values store 
-% the index of the plane, we will need to convert it to an elevation in µm
-% (see the voxel_depth parameter below).
 heightmap_filename  = 'HeightMap-2.tif';
-
-% The image to map on the tissue surface. In this example we simply take
-% a capture of the projection results.
 image_file_path     = 'static/Projection-2.png';
-
-% Pixel XY size.
-% Physical size of a pixel in X and Y. This will be used to report sizes in
-% µm.
 pixel_size = 0.183; % µm
 units = 'µm';
-
-% Z spacing.
-% How many µm bewtween each Z-slices. We need this to convert the
-% height-map values, that stores the plane of interest, into µm.
 voxel_depth = 1.; % µm
-
-
-% Try to remove objects that have a Z position equal to 0. Normally this
-% value reports objects that are out of the region-of-interest.
 prune_zeros = true;
 inpaint_zeros = true;
-
-% Invert z for plotting.
 invert_z = true;
 
 %% Read files.
@@ -72,20 +48,33 @@ dpr = deproj.from_heightmap( ...
     inpaint_zeros, ...
     prune_zeros );
 
-%% Load the image to map.
+%% Load the image to map and display it.
 
-close all
-
+% The image to display must be a 2D image, colored of grayscale. Ideally it
+% has the same number of pixels and the same pixel size that the
+% segmentation image that helped creating the deproj object. 
+% What really matter is that we can have share X,Y coordinates thanks to
+% the pixel size and origin of the image.
 fprintf('Opening the image to map: %s\n', image_file_path )
+% Since it is a color image, we also load the LUT in the Tmap variable.
 [ T, Tmap ] = imread( image_file_path );
 
 figure 
 hold on
 axis equal
 
+% Plot the segmentation. If we pass 'w' to the 'plot_values_contour', the
+% cell faces will be transparent and their border will be painted in white.
 hc = dpr.plot_values_contour( 'w', gca );
 hc.LineWidth = 1;
+
+% This is the the command to plot the image on the tissue surface. Since we
+% have a color image, we pass the 'Tmap' array that contains the LUT of the
+% image. If you have a grayscale image, just pass the empty array [].
 dpr.texture_image( T, Tmap, pixel_size );
+
+% Put some lighting and orientation so that we can get a feeling of the
+% tissue ripples. 
 axis off
 lighting gouraud
 light
