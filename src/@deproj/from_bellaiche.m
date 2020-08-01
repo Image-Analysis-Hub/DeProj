@@ -92,7 +92,7 @@ function obj = from_bellaiche( ...
         % Get the junction ids.
         junction_ids = cells.vertices{ i };
         
-        % Get center position with respect to crvature image.
+        % Get center position with respect to curvature image.
         xc = round( center( 1 ) / pixel_size ) - min_x;
         yc = round( center( 2 ) / pixel_size ) - min_y;
         curvatures = [ curvMean( yc, xc ), curvGauss( yc, xc ), curvK1( yc, xc), curvK2( yc, xc ) ];

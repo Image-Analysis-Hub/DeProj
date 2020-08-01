@@ -11,11 +11,11 @@ clc
 % Add DeProj functions to the path.
 addpath('./src')
 
-% Where are the images.
+% Where are the files.
 root_folder = 'samples';
 
 % The segmentation results. Here we use the results from Y. Bellaiche lab
-% analysis software. The results must contain a CELL, FRAME, VERTICES and
+% analysis software. The results must contain a CELLS, FRAME, VERTICES and
 % SIDES structures.
 segmentation_filename   = 'AdultZebrafishBrainSeg.mat';
 
