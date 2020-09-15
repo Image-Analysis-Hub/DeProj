@@ -1,4 +1,4 @@
-function [ objects, junction_graph ] = mask_to_objects( I )
+function [ objects, junction_graph ] = mask_to_objects( I, downsample )
 %% MASK_TO_CELL Returns the cells from a BW image with ridges.
 % This function takes as input an image that was generated e.g. with the
 % morphological segmentation technique, where each object is white and
@@ -12,6 +12,10 @@ function [ objects, junction_graph ] = mask_to_objects( I )
 %
 % Jean-Yves Tinevez - Institut Pasteur - Nov 2019.
 
+
+if nargin < 2
+    downsample = true;
+end
 
 %% Create mask.
 
@@ -32,8 +36,13 @@ for i = 1 : n_cells
     temp = false( CC.ImageSize );
     temp( CC.PixelIdxList{ i } ) = true;
     temp = imdilate( temp, se, 'same' );
-    bounds = bwboundaries( temp, 4, 'noholes' );
-    B{ i } = bounds{ 1 };
+    bounds = bwboundaries( temp, 8, 'noholes' );
+    if downsample
+        b = reducepoly( bounds{ 1 }, 0.005 );
+    else
+        b = bounds{ 1 };
+    end
+    B{ i } = b;
 end
 
 %% Remove cells touching the border.
@@ -127,8 +136,9 @@ for i = n_cells : -1 : 1
     end
     
     objects( i ).junctions = unique( visited_junctions );
-    objects( i ).boundary = boundary;
-    objects( i ).center = mean( boundary );
+    % Permute X and Y.
+    objects( i ).boundary = [ boundary(:,2) boundary(:,1) ];
+    objects( i ).center = mean( objects( i ).boundary );
     
 end
 
