@@ -4,6 +4,7 @@ DeProj is a MATLAB app made to yield accurate morphological measurements on cell
 
 **Table of Contents**
 
+* [Citation.](#citation)
 * [What is DeProj useful for.](#what-is-deproj-useful-for)
    * [Measuring cell morphologies on 2D projections.](#measuring-cell-morphologies-on-2d-projections)
    * [Projection artefacts.](#projection-artefacts)
@@ -20,6 +21,17 @@ DeProj is a MATLAB app made to yield accurate morphological measurements on cell
 * [Appendix.](#appendix)
    * [Projection tools that yields the height-map.](#projection-tools-that-yields-the-height-map)
    * [Segmentation tools for the projection.](#segmentation-tools-for-the-projection)
+
+## Citation.
+
+If you use this work for your Research, please cite the paper it is described in:
+
+> __DProj: A toolbox for local 2D projection and accurate morphometrics of large 3D microscopy images.__
+> 
+> Sébastien Herbert, Léo Valon, Laure Mancini, Nicolas Dray, Paolo Caldarelli, Jérôme Gros, Elric Esposito, Spencer L. Shorte, Laure Bally-Cuif, Romain Levayer, Nathalie Aulner, Jean-Yves Tinevez
+> 
+> bioRxiv 2021.01.15.426809; doi: https://doi.org/10.1101/2021.01.15.426809
+
 
 ## What is DeProj useful for.
 
