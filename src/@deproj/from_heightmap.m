@@ -30,6 +30,11 @@ function obj = from_heightmap( ...
         pixel_size = 1.;
     end
     
+    %% Safe conversion
+    
+    I = double( I );
+    H = double( H );
+    
     %% Load objects from segmentation mask.
     
     fprintf('Converting mask to objects.\n' )
