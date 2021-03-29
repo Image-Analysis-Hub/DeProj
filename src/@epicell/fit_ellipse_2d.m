@@ -27,6 +27,11 @@ function [ f, Q ] = fit_ellipse_2d( p, method )
     % Formulas from 
     % https://en.wikipedia.org/wiki/Ellipse#In_Cartesian_coordinates
     
+        if isempty( Q )
+            f = [ NaN NaN NaN NaN NaN ];
+            return
+        end
+    
         A = Q(1);
         B = Q(2);
         C = Q(3);
@@ -92,6 +97,10 @@ function [ f, Q ] = fit_ellipse_2d( p, method )
         cond = 4*evec(1,:).*evec(3,:)-evec(2,:).^2;
         A1 = evec(:,find(cond>0)); %#ok<FNDSB>
         Q = [A1; T*A1];
+        if isempty( Q )
+            return
+        end
+        
         A4 = Q(4)-2*Q(1)*centroid(1)-Q(2)*centroid(2);
         A5 = Q(5)-2*Q(3)*centroid(2)-Q(2)*centroid(1);
         A6 = Q(6)+Q(1)*centroid(1)^2+Q(3)*centroid(2)^2+...
