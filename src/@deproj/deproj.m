@@ -26,6 +26,9 @@ classdef deproj
         % Exports results to a spreadsheet file.
         to_file( obj, file_name, include_header )
         
+        % Export tissue mesh to an OBJ file.
+        to_objfile( obj, file_name, simplified )
+        
         %% Conversion between MATLAB objects.
         
         % Returns the faces and vertices of the junction graph of a instance.
