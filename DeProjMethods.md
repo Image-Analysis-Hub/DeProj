@@ -21,6 +21,7 @@ But the really important methods are those who create a `deproj` analysis result
                * [The import.](#the-import-1)
             * [to_table](#to_table)
             * [to_file](#to_file)
+            * [to_objfile](#to_objfile)
             * [figure_cell_sizes](#figure_cell_sizes)
             * [figure_tissue_orientation](#figure_tissue_orientation)
             * [figure_cell_elongation](#figure_cell_elongation)
@@ -318,6 +319,22 @@ dpr.to_file( 'table.xlsx' )
 ```
 
 ![ExampleExport](static/ExampleExport.png)
+
+#### `to_objfile`
+
+`to_objfile( obj, file_name, simplified )`
+
+Exports the tissue mesh to a Wavefront OBJ file (see https://en.wikipedia.org/wiki/Wavefront_.obj_file).
+
+If `simplified` is `true`, then we only export a simplified mesh made of the junction graph. Otherwise we export one face per cell, with the vertices being the points along the cell contour.
+
+Simplified mesh:
+
+![ExampleExport](static/toobjfile_simplified.png)
+
+Full mesh:
+
+![ExampleExport](static/toobjfile.png)
 
 #### `figure_cell_sizes`
 
