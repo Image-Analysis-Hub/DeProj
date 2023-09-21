@@ -47,6 +47,9 @@ classdef deproj
         
         % Figure with the local curvaure for a collection of epicells.
         [ hf, ax1, ax2, ax3 ] = figure_curvatures( obj, scale_bar_length )
+
+        % Figure with the gaussian curvaure for a collection of epicells.
+        [ hf, ax1] = figure_gaussian_curvature( obj, scale_bar_length )
         
         % Figure with the cells area and perimeter.
         [ hf, ax1, ax2 ] = figure_cell_sizes( obj, scale_bar_length )
