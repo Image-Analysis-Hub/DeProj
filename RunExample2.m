@@ -59,6 +59,9 @@ dpr.figure_tissue_orientation( scale_bar_length );
 fprintf( 'Plotting the tissue local curvature.\n' )
 dpr.figure_curvatures( scale_bar_length );
 
+fprintf( 'Plotting the tissue gaussian curvature.\n' )
+dpr.figure_gaussian_curvature( scale_bar_length );
+
 fprintf( 'Plotting the cell elongation and direction.\n' )
 dpr.figure_cell_elongation( scale_bar_length );
 
