@@ -402,6 +402,10 @@ DeProj requires the height-map along with the segmentation of the projection, in
 - The [Min Cost Z Surface](https://imagej.net/Minimum_Cost_Z_surface_Projection) ImageJ plugin.
 - The [Smooth Manifold Extraction](https://github.com/biocompibens/SME) MATLAB tool (a Fiji version is also distributed) and its recent, faster implementation: [FastSME](https://github.com/Shihav/FastSME).
 
+If the projection tool doesn't generate the height map:
+
+- [LocalZBackProj](https://github.com/Image-Analysis-Hub/localZBackProjector) can estimates the height-map from the projection and the initial 3D image, in cases where the projection algorithm doesn't provide a height map.
+
 ### Segmentation tools for the projection.
 
 Several open-source tools can segment the projection and yield the cells contour or the mask displayed above. Some of them offer an intuitive user interface, allowing for immediate usage and user interaction. For instance:
