@@ -1,6 +1,6 @@
 ![DeProjLogo-256](static/DeProjLogo-512.png)
 
-DeProj is a MATLAB app made to yield accurate morphological measurements on cells in epithelia or tissues.
+DeProj is a MATLAB app made to yield accurate morphological measurements on cells in epithelia or tissues. A python version has been recently implented, see [extensions](#extensions)
 
 **Table of Contents**
 
@@ -18,6 +18,7 @@ DeProj is a MATLAB app made to yield accurate morphological measurements on cell
       * [The height-map.](#the-height-map)
       * [Running the analysis.](#running-the-analysis)
 * [More documentation.](#more-documentation)
+* [Extensions](#extensions)
 * [Appendix.](#appendix)
    * [Projection tools that yields the height-map.](#projection-tools-that-yields-the-height-map)
    * [Segmentation tools for the projection.](#segmentation-tools-for-the-projection)
@@ -382,6 +383,12 @@ The file [DeProjMethods.md](DeProjMethods.md) documents the methods you can run 
 - the methods to generate the plot we exemplified above.
 - the methods to export the analysis results to tables, files, ...
 
+## Extensions
+
+* Deproj has been implemented in python, see [`deprojpy`](https://pypi.org/project/deprojpy/) module, available on github: [deprojpy github repository](https://github.com/zen-laboratory/DeProjPy).
+* Deprojpy is being integrated in [FishFeats](https://gletort.github.io/FishFeats/), a napari plugin for streamline quantification of RNA content and immuno staining at the single-cell level in 3D tissue.
+
+
 ## Appendix.
 
 ### Projection tools that yields the height-map.
@@ -402,3 +409,4 @@ Several open-source tools can segment the projection and yield the cells contour
 - [EpiTools](https://github.com/epitools) is a toolbox with MATLAB and [Icy](http://icy.bioimageanalysis.org/) components built to study the dynamics of drosophila imaginal discs. Its segmentation algorithm relies on region growing from seeds determined automatically and merged based on region areas.
 - [SEGGA](https://github.com/ZallenLab/SEGGA) is standalone applications written with MATLAB proposed for the investigation of drosophila embryo germband epithelium.
 - TissueAnalyzer is a tissue segmentation tool, distributed along [TissueMiner](https://github.com/mpicbg-scicomp/tissue_miner).
+- [EpiCure](https://image-analysis-hub.github.io/Epicure/), a napari plugin to ease manual correction of epithelial movie segmentation. It can perform segmentation and tracking of 2D (after projection) epithelia movies and propose a lot of features to correct the results and quantify them.
